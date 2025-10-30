@@ -6,13 +6,18 @@ import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Colors } from '@/constants/theme';
 import { useColorScheme } from '@/hooks/use-color-scheme';
 
-export default function TabLayout() {
+export default function Layout() {
   const colorScheme = useColorScheme();
+
+  // safe fallback: avoid throwing if Colors or the chosen scheme is undefined
+  const tintColor =
+    (Colors && Colors[colorScheme ?? 'light'] && Colors[colorScheme ?? 'light'].tint) ??
+    '#007AFF';
 
   return (
     <Tabs
       screenOptions={{
-        tabBarActiveTintColor: Colors[colorScheme ?? 'light'].tint,
+        tabBarActiveTintColor: tintColor,
         headerShown: false,
         tabBarButton: HapticTab,
       }}>
